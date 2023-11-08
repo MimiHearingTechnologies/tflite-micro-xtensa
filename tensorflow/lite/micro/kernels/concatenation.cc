@@ -29,7 +29,7 @@ namespace tflite {
 
 namespace {
 
-constexpr int kMaxInputNum = 10;  // Maximum number of input tensors
+constexpr int kMaxInputNum = 48;  // Maximum number of input tensors (was 10)
 constexpr int kOutputTensor = 0;
 
 struct OpData {
@@ -140,6 +140,7 @@ TfLiteStatus Prepare(TfLiteContext* context, TfLiteNode* node) {
 
   // This implementation does not support large number of input tensors
   const int num_inputs = NumInputs(node);
+  // printf("NUM IN: %d / %d\n", num_inputs, kMaxInputNum);
   TF_LITE_ENSURE(context, num_inputs <= kMaxInputNum);
 
   // Shapes with dimensions >4 are not yet supported with static allocation.
